@@ -53,6 +53,10 @@ class ViewController: UIViewController {
     func nextQuestion() {
         if questionNumber < questions.count {
             questionLabel.text = questions[questionNumber].questionText
+            
+            // view.frame.size.width ..... get the width of the actual screen (of the device)
+            // CGFloat is needed because the width of progressBar & view is in 'CG'(Core Graphic). Therefore, need to convert to CGFloat
+            progressBar.frame.size.width = (view.frame.size.width / 13) * CGFloat(questionNumber + 1)
         } else {
             print("No More Question!!!!!!!!!!!!!!!")
 //            startOver()
@@ -65,8 +69,10 @@ class ViewController: UIViewController {
     func checkAnswer() {
         if submittedAnswer == questions[questionNumber].correctAnswer {
             print("CORRECT ANSWER!!!!")
+            ProgressHUD.showSuccess("Correct!")
         } else {
             print("WRONG!!!!!")
+            ProgressHUD.showError("Incorrect!")
         }
     }
     
